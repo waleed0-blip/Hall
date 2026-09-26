@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick English Quiz 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #feada6 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating Hearts Background */
+    .bg-hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .heart-particle {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 20px;
+      animation: floatUp 8s infinite linear;
+      bottom: -10%;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Card Styling */
+    .quiz-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 35px 25px;
+      width: 100%;
+      max-width: 460px;
+      box-shadow: 0 20px 40px rgba(220, 80, 120, 0.2);
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: transform 0.3s ease;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      width: 100%;
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      height: 8px;
+      margin-bottom: 25px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 20%;
+      background: linear-gradient(90deg, #ff4b72, #ff758c);
+      border-radius: 10px;
+      transition: width 0.4s ease;
+    }
+
+    /* Titles & Text */
+    h2 {
+      color: #333;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    p.question-text {
+      color: #555;
+      font-size: 16px;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+
+    /* Options Buttons */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-option {
+      background: #ffffff;
+      color: #444;
+      border: 2px solid #f0f0f0;
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .btn-option:hover, .btn-option:active {
+      background: #ff4b72;
+      color: white;
+      border-color: #ff4b72;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(255, 75, 114, 0.3);
+    }
+
+    /* Hidden Utility Class */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Final Result Styling */
+    .result-box {
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .result-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 38px;
+      color: #ff4b72;
+      margin-bottom: 15px;
+    }
+
+    .result-msg {
+      font-size: 18px;
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .love-badge {
+      display: inline-block;
+      background: #ffe6ec;
+      color: #ff4b72;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Background Hearts -->
+  <div class="bg-hearts" id="bgHearts"></div>
+
+  <div class="quiz-card">
+    
+    <!-- Progress Bar -->
+    <div class="progress-container" id="progressContainer">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Question 1 -->
+    <div id="q1">
+      <h2>Question 1 of 5</h2>
+      <p class="question-text">Choose the correct sentence:</p>
+      <div class="options-grid">
+        <button class="btn-option" onclick="nextQuestion('q1', 'q2', 40)">A) She go to the park.</button>
+        <button class="btn-option" onclick="nextQuestion('q1', 'q2', 40)">B) She goes to the park. ✨</button>
+        <button class="btn-option" onclick="nextQuestion('q1', 'q2', 40)">C) She going to park.</button>
+      </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div id="q2" class="hidden">
+      <h2>Question 2 of 5</h2>
+      <p class="question-text">Complete the sentence:<br><b>"No matter how busy the day gets, you are always on my _____."</b></p>
+      <div class="options-grid">
+        <button class="btn-option" onclick="nextQuestion('q2', 'q3', 60)">A) Mind 🧠</button>
+        <button class="btn-option" onclick="nextQuestion('q2', 'q3', 60)">B) Heart ❤️</button>
+        <button class="btn-option" onclick="nextQuestion('q2', 'q3', 60)">C) Both A and B 🥰</button>
+      </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div id="q3" class="hidden">
+      <h2>Question 3 of 5</h2>
+      <p class="question-text">What is the meaning of the word <b>"Irreplaceable"</b>?</p>
+      <div class="options-grid">
+        <button class="btn-option" onclick="nextQuestion('q3', 'q4', 80)">A) Easy to find someone else</button>
+        <button class="btn-option" onclick="nextQuestion('q3', 'q4', 80)">B) So special that no one can take their place 💖</button>
+      </div>
+    </div>
+
+    <!-- Question 4 -->
+    <div id="q4" class="hidden">
+      <h2>Question 4 of 5</h2>
+      <p class="question-text">Translate this feeling into English:<br><b>"How much do I miss you right now?"</b></p>
+      <div class="options-grid">
+        <button class="btn-option" onclick="nextQuestion('q4', 'q5', 100)">A) A little bit</button>
+        <button class="btn-option" onclick="nextQuestion('q4', 'q5', 100)">B) More than words can ever describe! ✨</button>
+      </div>
+    </div>
+
+    <!-- Question 5 (Final Reveal Question) -->
+    <div id="q5" class="hidden">
+      <h2>Final Question</h2>
+      <p class="question-text">Are you ready to see your final score?</p>
+      <div class="options-grid">
+        <button class="btn-option" onclick="showResult()">Yes, show me! 🎉</button>
+      </div>
+    </div>
+
+    <!-- Result Screen -->
+    <div id="result" class="hidden result-box">
+      <div class="love-badge">Score: 100% PERFECT! 🏆</div>
+      <h1 class="result-title">Congratulations! ❤️</h1>
+      <p class="result-msg">
+        Well, to be honest... this wasn't just a regular English quiz. <br><br>
+        It was created just for you, to tell you that <b>I love you so much</b> and <b>I miss you terribly!</b> 🥰✨
+      </p>
+    </div>
+
+  </div>
+
+  <script>
+    // Generate Floating Hearts Background
+    const bg = document.getElementById('bgHearts');
+    const heartSymbols = ['❤️', '💖', '🌸', '✨', '💕'];
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart-particle';
+      heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+      bg.appendChild(heart);
+    }
+
+    // Navigation Function
+    function nextQuestion(currentId, nextId, progressValue) {
+      document.getElementById(currentId).classList.add('hidden');
+      document.getElementById(nextId).classList.remove('hidden');
+      document.getElementById('progressBar').style.width = progressValue + '%';
+    }
+
+    // Show Result with Confetti
+    function showResult() {
+      document.getElementById('q5').classList.add('hidden');
+      document.getElementById('progressContainer').classList.add('hidden');
+      document.getElementById('result').classList.remove('hidden');
+
+      // Trigger Confetti Explosion
+      confetti({
+        particleCount: 120,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
+      // Extra Burst of Hearts
+      setTimeout(() => {
+        confetti({
+          particleCount: 50,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 }
+        });
+        confetti({
+          particleCount: 50,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 }
+        });
+      }, 400);
+    }
+  </script>
+</body>
+</html>
