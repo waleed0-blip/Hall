@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Quiz For Yumna ✨</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>Official Love Agreement ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     * {
@@ -20,62 +20,41 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 24px 16px;
+      padding: 20px 16px;
+      color: #2c2a29;
       position: relative;
       overflow-x: hidden;
-      color: #2c2a29;
     }
 
-    /* Elegant Soft Glow Effect in Background */
     .bg-glow {
       position: absolute;
-      width: 320px;
-      height: 320px;
-      background: radial-gradient(circle, rgba(235, 213, 201, 0.5) 0%, rgba(250, 246, 240, 0) 70%);
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(235, 213, 201, 0.45) 0%, rgba(250, 246, 240, 0) 70%);
       border-radius: 50%;
-      top: 10%;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
       z-index: 1;
       pointer-events: none;
     }
 
-    /* Main Card Container */
-    .quiz-card {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(212, 184, 166, 0.3);
-      border-radius: 28px;
-      padding: 40px 28px;
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(212, 184, 166, 0.35);
+      border-radius: 24px;
+      padding: 36px 24px;
       width: 100%;
-      max-width: 440px;
-      box-shadow: 0 16px 40px rgba(74, 58, 49, 0.05);
+      max-width: 450px;
+      box-shadow: 0 16px 40px rgba(74, 58, 49, 0.06);
       text-align: center;
       position: relative;
       z-index: 2;
     }
 
-    /* Subtle Progress Bar */
-    .progress-container {
-      width: 100%;
-      background: #f0eae1;
-      border-radius: 20px;
-      height: 6px;
-      margin-bottom: 32px;
-      overflow: hidden;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 20%;
-      background: linear-gradient(90deg, #c8967e, #b07d62);
-      border-radius: 20px;
-      transition: width 0.4s ease;
-    }
-
-    /* Typography */
     .step-tag {
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: #a38372;
@@ -85,32 +64,30 @@
 
     h2.question-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 26px;
+      font-size: 25px;
       font-weight: 600;
       color: #2c2a29;
       margin-bottom: 24px;
       line-height: 1.3;
     }
 
-    /* Options Buttons */
     .options-grid {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .btn-option {
       background: #ffffff;
       color: #4a4543;
       border: 1px solid #e6ded6;
-      padding: 16px 20px;
-      border-radius: 18px;
-      font-size: 15px;
+      padding: 15px 18px;
+      border-radius: 16px;
+      font-size: 14px;
       font-weight: 400;
       cursor: pointer;
       transition: all 0.25s ease;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-      text-align: center;
     }
 
     .btn-option:hover, .btn-option:active {
@@ -118,16 +95,19 @@
       color: #faf6f0;
       border-color: #2c2a29;
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(44, 42, 41, 0.12);
     }
 
-    /* Hidden Utility */
     .hidden {
       display: none !important;
     }
 
-    /* Result Screen Styling */
-    .result-box {
+    /* Contract Styling */
+    .contract-box {
+      border: 2px double #c8967e;
+      border-radius: 18px;
+      padding: 24px 18px;
+      background: #fffdfa;
+      position: relative;
       animation: fadeIn 0.8s ease forwards;
     }
 
@@ -136,41 +116,72 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .yumna-title {
+    .contract-header {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 38px;
-      font-weight: 500;
-      color: #a36148;
-      margin-bottom: 16px;
-      font-style: italic;
-    }
-
-    .result-msg {
-      font-size: 16px;
-      color: #595350;
-      line-height: 1.8;
-      margin-bottom: 28px;
-      font-weight: 300;
-    }
-
-    .score-badge {
-      display: inline-block;
-      background: #f4ebe2;
-      color: #a36148;
-      padding: 6px 18px;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 24px;
       letter-spacing: 1px;
-      margin-bottom: 20px;
-      border: 1px solid #ebdcd0;
+      text-transform: uppercase;
+      color: #8c4a32;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
 
-    .heart-icon {
-      font-size: 28px;
+    .contract-sub {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      color: #a38372;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .names-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 20px 0;
+      padding: 12px 0;
+      border-top: 1px solid #ebdcd0;
+      border-bottom: 1px solid #ebdcd0;
+    }
+
+    .person-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: 30px;
+      color: #2c2a29;
+    }
+
+    .ring-icon {
+      font-size: 20px;
+      color: #c8967e;
+    }
+
+    .terms-text {
+      font-size: 13.5px;
+      color: #595350;
+      line-height: 1.7;
+      text-align: left;
+      margin-bottom: 20px;
+      background: #faf6f0;
+      padding: 14px;
+      border-radius: 12px;
+    }
+
+    .terms-text li {
+      margin-left: 18px;
+      margin-bottom: 6px;
+    }
+
+    .seal-stamp {
+      display: inline-block;
+      border: 2px dashed #a36148;
       color: #a36148;
-      margin-bottom: 12px;
-      display: block;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -178,95 +189,96 @@
 
   <div class="bg-glow"></div>
 
-  <div class="quiz-card">
+  <div class="card">
     
-    <!-- Progress Bar -->
-    <div class="progress-container" id="progressContainer">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-
     <!-- Question 1 -->
     <div id="q1">
-      <div class="step-tag">Question 01 / 05</div>
-      <h2 class="question-title">Choose the correct grammar sentence:</h2>
+      <div class="step-tag">Compatibility Assessment • Step 1/3</div>
+      <h2 class="question-title">How do you prefer to handle future disagreements together?</h2>
       <div class="options-grid">
-        <button class="btn-option" onclick="nextQuestion('q1', 'q2', 40)">She go to the park.</button>
-        <button class="btn-option" onclick="nextQuestion('q1', 'q2', 40)">She goes to the park. ✨</button>
-        <button class="btn-option" onclick="nextQuestion('q1', 'q2', 40)">She going to park.</button>
+        <button class="btn-option" onclick="nextQuestion('q1', 'q2')">We discuss peacefully and give warm hugs ✨</button>
+        <button class="btn-option" onclick="nextQuestion('q1', 'q2')">We order good food and talk it out 🥰</button>
       </div>
     </div>
 
     <!-- Question 2 -->
     <div id="q2" class="hidden">
-      <div class="step-tag">Question 02 / 05</div>
-      <h2 class="question-title">Complete the sentence:<br><i>"No matter how busy the day gets, you are always on my _____."</i></h2>
+      <div class="step-tag">Compatibility Assessment • Step 2/3</div>
+      <h2 class="question-title">What is your long-term policy on loving each other?</h2>
       <div class="options-grid">
-        <button class="btn-option" onclick="nextQuestion('q2', 'q3', 60)">Mind 🧠</button>
-        <button class="btn-option" onclick="nextQuestion('q2', 'q3', 60)">Heart 🤍</button>
-        <button class="btn-option" onclick="nextQuestion('q2', 'q3', 60)">Both Mind & Heart ✨</button>
+        <button class="btn-option" onclick="nextQuestion('q2', 'q3')">Unlimited love, care, and lifetime loyalty 🤍</button>
+        <button class="btn-option" onclick="nextQuestion('q2', 'q3')">Always staying by each other's side ✨</button>
       </div>
     </div>
 
     <!-- Question 3 -->
     <div id="q3" class="hidden">
-      <div class="step-tag">Question 03 / 05</div>
-      <h2 class="question-title">What is the true meaning of the word <b>"Irreplaceable"</b>?</h2>
+      <div class="step-tag">Compatibility Assessment • Step 3/3</div>
+      <h2 class="question-title">Do you agree to officially share all upcoming life adventures together?</h2>
       <div class="options-grid">
-        <button class="btn-option" onclick="nextQuestion('q3', 'q4', 80)">Easy to find a substitute</button>
-        <button class="btn-option" onclick="nextQuestion('q3', 'q4', 80)">So precious that no one else could ever take their place 🤍</button>
+        <button class="btn-option" onclick="showContract()">Yes, I agree completely! 💍</button>
+        <button class="btn-option" onclick="showContract()">Absolutely YES! ✨</button>
       </div>
     </div>
 
-    <!-- Question 4 -->
-    <div id="q4" class="hidden">
-      <div class="step-tag">Question 04 / 05</div>
-      <h2 class="question-title">How would you translate this feeling right now?<br><i>"How much do I miss you?"</i></h2>
-      <div class="options-grid">
-        <button class="btn-option" onclick="nextQuestion('q4', 'q5', 100)">Just a little bit</button>
-        <button class="btn-option" onclick="nextQuestion('q4', 'q5', 100)">Far more than any words can ever express ✨</button>
-      </div>
-    </div>
+    <!-- Final Trap: The Marriage Contract -->
+    <div id="contractScreen" class="hidden contract-box">
+      <div class="contract-header">Contract of Eternal Love</div>
+      <div class="contract-sub">Binding Heart Agreement</div>
 
-    <!-- Question 5 -->
-    <div id="q5" class="hidden">
-      <div class="step-tag">Final Step</div>
-      <h2 class="question-title">Are you ready to see your final test results, Yumna?</h2>
-      <div class="options-grid">
-        <button class="btn-option" onclick="showResult()">Yes, show me my result ✨</button>
+      <div class="names-row">
+        <div class="person-name">Waleed</div>
+        <div class="ring-icon">💍</div>
+        <div class="person-name">Yumna</div>
       </div>
-    </div>
 
-    <!-- Result Screen -->
-    <div id="result" class="hidden result-box">
-      <span class="heart-icon">🤍</span>
-      <div class="score-badge">SCORE: 100% PERFECT</div>
-      <h1 class="yumna-title">Dearest Yumna,</h1>
-      <p class="result-msg">
-        Truth be told, this wasn't just a regular English test... <br><br>
-        It was made with love, just for you, to remind you that <b>I love you so very much</b> and <b>I miss you more than words can say.</b> ✨
-      </p>
+      <div class="terms-text">
+        <b>OFFICIAL RECORD OF AGREEMENT:</b><br>
+        By answering "YES" to all the previous clauses, Party B (<b>Yumna</b>) has officially and irrevocably agreed to:
+        <ul style="margin-top: 8px;">
+          <li>Be Waleed's forever life partner & best friend.</li>
+          <li>Accept endless love, warm hugs, and daily care.</li>
+          <li>Marry Party A (Waleed) whenever the time comes! 🤍</li>
+        </ul>
+      </div>
+
+      <div class="seal-stamp" id="stampBtn" onclick="sealAgreement()">
+        Click to Sign & Stamp Contract ✒️
+      </div>
     </div>
 
   </div>
 
   <script>
-    function nextQuestion(currentId, nextId, progressValue) {
+    function nextQuestion(currentId, nextId) {
       document.getElementById(currentId).classList.add('hidden');
       document.getElementById(nextId).classList.remove('hidden');
-      document.getElementById('progressBar').style.width = progressValue + '%';
     }
 
-    function showResult() {
-      document.getElementById('q5').classList.add('hidden');
-      document.getElementById('progressContainer').classList.add('hidden');
-      document.getElementById('result').classList.remove('hidden');
+    function showContract() {
+      document.getElementById('q3').classList.add('hidden');
+      document.getElementById('contractScreen').classList.remove('hidden');
 
-      // Subtle Champagne Confetti
       confetti({
-        particleCount: 80,
+        particleCount: 70,
         spread: 60,
         origin: { y: 0.6 },
         colors: ['#c8967e', '#e6ded6', '#a36148']
+      });
+    }
+
+    function sealAgreement() {
+      const stamp = document.getElementById('stampBtn');
+      stamp.innerHTML = '✅ OFFICIALLY SIGNED & APPROVED!';
+      stamp.style.background = '#a36148';
+      stamp.style.color = '#ffffff';
+      stamp.style.borderStyle = 'solid';
+
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.5 },
+        colors: ['#c8967e', '#ffdfa9', '#a36148', '#ffffff']
       });
     }
   </script>
